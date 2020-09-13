@@ -1,14 +1,16 @@
 <template>
   <v-card>
-    <v-card-title class="headline">{{ auftrag.id }}</v-card-title>
-    <v-card-text>{{ auftrag.description }}</v-card-text>
+    <v-card-title class="headline pl-5 pt-7"
+      >Auftrag Nr.{{ auftrag.id }}</v-card-title
+    >
+
     <v-list>
-      <auftrag-props :auftragProps="getRemainingProperties"></auftrag-props>
+      <auftrag-props :auftragProps="auftrag"></auftrag-props>
     </v-list>
     <v-card-actions
       ><!-- //!!TODO: insert other required properties -->
       <v-spacer></v-spacer>
-      <v-btn color="red darken-1" text @click="close"
+      <v-btn outlined color="red darken-1" text @click="close"
         >Informationen Schliesen</v-btn
       >
     </v-card-actions>
@@ -33,16 +35,6 @@ export default {
   methods: {
     close() {
       this.$emit("close");
-    }
-  },
-  computed: {
-    getRemainingProperties() {
-      let remProps = { ...this.auftrag };
-      console.log(`these are the before deletion props ${remProps}`);
-      delete remProps.id;
-      delete remProps.description;
-      console.log(`these are the remaining props ${remProps}`);
-      return remProps;
     }
   }
 };

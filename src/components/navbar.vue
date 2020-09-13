@@ -1,5 +1,12 @@
 <template>
-  <v-app-bar absolute color="#fcb69f" dark src="../assets/repairPic.jpg" app>
+  <v-app-bar
+    absolute
+    color="#fcb69f"
+    dark
+    src="../assets/repairPic.jpg"
+    prominent
+    app
+  >
     <template v-slot:img="{ props }">
       <v-img
         v-bind="props"
@@ -16,25 +23,49 @@
           ><v-icon class="mr-2">{{ link.icon }} </v-icon> {{ link.text }}</v-tab
         >
       </v-tabs>
+      <transition name="fade"
+        ><v-text-field
+          @keyup="filterDevices(filterTerm)"
+          v-model="filterTerm"
+          v-if="searchBar"
+          width="300"
+        ></v-text-field
+      ></transition>
+      <v-btn icon>
+        <v-icon @click="searchBar = !searchBar">mdi-magnify</v-icon>
+      </v-btn>
     </template>
-    <v-btn icon>
-      <v-icon>mdi-magnify</v-icon>
-    </v-btn>
   </v-app-bar>
 </template>
 
 <script>
+import { mapMutations } from "vuex";
 export default {
   data() {
     return {
+      filterTerm: "",
       drawer: false,
-      links: [
-        { icon: "mdi-tablet-cellphone", text: "Geräte", route: "/" },
-        { icon: "mdi-briefcase-outline", text: "Aufträge", route: "/auftraege" }
-      ]
+      searchBar: false,
+      links: [{ icon: "mdi-briefcase-outline", text: "Aufträge", route: "/" }]
     };
+  },
+
+  methods: {
+    ...mapMutations(["changeCurrentDevice"]),
+    filterDevices() {
+      console.log("filter term: ", this.filterTerm);
+      this.changeCurrentDevice(this.filterTerm);
+    }
   }
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s;
+}
+.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+  opacity: 0;
+}
+</style>
