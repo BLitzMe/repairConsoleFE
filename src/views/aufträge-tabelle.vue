@@ -10,14 +10,10 @@
           :footer-props="{
             showFirstLastPage: true,
 
-            'items-per-page-text': 'Auftäre Pro Seite'
+            'items-per-page-text': 'Aufträge Pro Seite'
           }"
         >
           <template v-slot:body="{ items }">
-            <th v-for="h in items.headers" :key="h.text" class="h1">
-              {{ h.text }}
-            </th>
-
             <tbody>
               <tr
                 class="row-pointer "
@@ -99,8 +95,5 @@ export default {
 <style lang="scss" scoped>
 .row-pointer:hover {
   cursor: pointer;
-}
-th {
-  font-size: 24px;
 }
 </style>

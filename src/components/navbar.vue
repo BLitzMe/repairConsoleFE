@@ -53,7 +53,6 @@ export default {
   methods: {
     ...mapMutations(["changeCurrentDevice"]),
     filterDevices() {
-      console.log("filter term: ", this.filterTerm);
       this.changeCurrentDevice(this.filterTerm);
     }
   }

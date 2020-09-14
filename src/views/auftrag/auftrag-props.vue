@@ -83,13 +83,11 @@ export default {
       return this.getTransformedProps();
     },
     getRepairDevice() {
-      console.log(this.auftragProps.repairDevice);
       return this.auftragProps.repairDevice;
     }
   },
   methods: {
     getTransformedProps() {
-      console.log("pring out auftrag props", this.auftragProps.repairDevice);
       let props = { ...this.auftragProps };
       props = {
         Alter: props.age,

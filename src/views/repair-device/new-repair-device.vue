@@ -70,7 +70,6 @@ export default {
         )
         .then((response) => {
           this.patchDeviceId(response.data.id);
-          console.log("new repair device: ", response.data);
         })
         .catch((err) => {
           console.log(err);
@@ -86,10 +85,9 @@ export default {
             })
           }
         )
-        .then((devices) => {
+        .then(() => {
           this.$store.dispatch("getUserDevices");
           this.close();
-          console.log("UserDevices: ", devices.data);
         })
         .catch((err) => {
           console.log(err);

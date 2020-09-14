@@ -3,12 +3,10 @@
     <v-card-title class="headline pl-5 pt-7"
       >Auftrag Nr.{{ auftrag.id }}</v-card-title
     >
-
     <v-list>
       <auftrag-props :auftragProps="auftrag"></auftrag-props>
     </v-list>
-    <v-card-actions
-      ><!-- //!!TODO: insert other required properties -->
+    <v-card-actions>
       <v-spacer></v-spacer>
       <v-btn outlined color="red darken-1" text @click="close"
         >Informationen Schliesen</v-btn

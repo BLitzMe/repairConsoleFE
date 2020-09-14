@@ -31,7 +31,6 @@ export default new Vuex.Store({
         })
         .then((devices) => {
           commit("setUserDevices", devices.data);
-          console.log("UserDevices: ", devices.data);
         })
         .catch((err) => {
           console.log(err);
