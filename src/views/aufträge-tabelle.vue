@@ -64,7 +64,7 @@ export default {
     return {
       headers: [
         {
-          text: "id",
+          text: "ID",
           value: "id"
         },
         {
@@ -72,15 +72,15 @@ export default {
           value: "manufacturer"
         },
         {
-          text: "Model",
+          text: "Modell",
           value: "model"
         },
         {
-          text: "Eingangs Datum",
+          text: "Eingangsdatum",
           value: "deliveryDay"
         },
         {
-          text: "Status des Auftrags",
+          text: "Status",
           value: "status"
         }
       ]
@@ -89,10 +89,13 @@ export default {
 
   computed: {
     ...mapGetters(["filteredByManufacturer"]),
+
     myUserDevices() {
       return this.filteredByManufacturer.map((device) => ({
         ...device,
-        status: "not in bearbeitung", //!!TODO: take it out when back end has one available
+
+        status: "in bearbeitung", //!!TODO: take it out when back end has one available
+
         showModal: false
       }));
     }

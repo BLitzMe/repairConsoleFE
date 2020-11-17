@@ -15,6 +15,7 @@
                 <v-col cols="4">
                   {{ propName }}
                 </v-col>
+
                 <v-col cols="8">
                   <v-btn
                     text
@@ -103,10 +104,10 @@ export default {
         Beschreibung: props.description,
 
         Hersteller: props.manufacturer,
-        Model: props.model,
+        Modell: props.model,
         Netzteil: props.powersupply,
-        "Reparatür Gerät": props.repairDevice,
-        Seriellnümmer: props.serialNumber
+        Reparaturanleitung: props.repairDevice,
+        Seirennümmer: props.serialNumber
       };
 
       return props;
