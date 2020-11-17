@@ -16,16 +16,21 @@
           <template v-slot:body="{ items }">
             <tbody>
               <tr
-                class="row-pointer "
+                class="row-pointer"
                 v-for="auftrag in items"
                 :key="auftrag.id"
                 @click="auftrag.showModal = true"
               >
                 <td>{{ auftrag.id }}</td>
+
                 <td>{{ auftrag.manufacturer }} {{ auftrag.model }}</td>
+
                 <td>{{ auftrag.model }}</td>
+
                 <td>{{ auftrag.deliveryDay }}</td>
+
                 <td>{{ auftrag.status }}</td>
+
                 <v-dialog
                   v-model="auftrag.showModal"
                   transition="dialog-bottom-transition"
@@ -49,10 +54,12 @@
 <script>
 import AuftragModal from "./auftrag/auftrag";
 import { mapGetters } from "vuex";
+
 export default {
   components: {
     auftrag: AuftragModal
   },
+
   data() {
     return {
       headers: [
@@ -79,6 +86,7 @@ export default {
       ]
     };
   },
+
   computed: {
     ...mapGetters(["filteredByManufacturer"]),
     myUserDevices() {

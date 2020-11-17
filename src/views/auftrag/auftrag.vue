@@ -4,10 +4,10 @@
       >Auftrag Nr.{{ auftrag.id }}</v-card-title
     >
     <v-list>
-      <auftrag-props :auftragProps="auftrag"></auftrag-props>
+      <auftrag-props :auftragProps="auftrag" />
     </v-list>
     <v-card-actions>
-      <v-spacer></v-spacer>
+      <v-spacer />
       <v-btn outlined color="red darken-1" text @click="close"
         >Informationen Schliesen</v-btn
       >
@@ -17,19 +17,23 @@
 
 <script>
 import AuftragProps from "./auftrag-props.vue";
+
 export default {
   components: {
     "auftrag-props": AuftragProps
   },
+
   props: {
     auftrag: {
       required: true,
       type: Object
     }
   },
+
   data() {
     return {};
   },
+
   methods: {
     close() {
       this.$emit("close");
@@ -37,5 +41,3 @@ export default {
   }
 };
 </script>
-
-<style lang="scss" scoped></style>

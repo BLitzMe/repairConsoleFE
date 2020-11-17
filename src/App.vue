@@ -9,15 +9,16 @@
 
 <script>
 import Navbar from "@/components/navbar.vue";
+
 export default {
   name: "App",
 
   components: { Navbar },
+
   mounted() {
     this.$store.dispatch("getUserDevices");
   },
-  data: () => ({
-    //
-  })
+
+  data: () => ({})
 };
 </script>

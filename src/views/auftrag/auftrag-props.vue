@@ -3,6 +3,7 @@
     <v-container>
       <v-row>
         <h2 class="ml-3 mb-5">Mehr Information</h2>
+
         <v-col cols="12"
           ><v-list-item
             class="elevation-1"
@@ -61,23 +62,27 @@
 <script>
 import NewRepairDevice from "../repair-device/new-repair-device.vue";
 import RepairDevice from "../repair-device/repair-device.vue";
+
 export default {
   components: {
     "new-repair-device": NewRepairDevice,
     "repair-device": RepairDevice
   },
+
   props: {
     auftragProps: {
       required: true,
       type: Object
     }
   },
+
   data() {
     return {
       newRepairDeviceModal: false,
       repairDeviceModal: false
     };
   },
+
   computed: {
     transformedProps() {
       return this.getTransformedProps();
@@ -86,6 +91,7 @@ export default {
       return this.auftragProps.repairDevice;
     }
   },
+
   methods: {
     getTransformedProps() {
       let props = { ...this.auftragProps };
