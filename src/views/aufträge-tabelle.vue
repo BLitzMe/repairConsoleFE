@@ -37,10 +37,7 @@
                   persistent
                   fullscreen
                 >
-                  <auftrag
-                    @close="auftrag.showModal = false"
-                    :auftrag="auftrag"
-                  ></auftrag>
+                  <auftrag @close="auftrag.showModal = false" :auftrag="auftrag"></auftrag>
                 </v-dialog>
               </tr>
             </tbody>
@@ -50,61 +47,61 @@
     </v-row>
   </v-container>
 </template>
-<!-- -->
+
 <script>
-import AuftragModal from "./auftrag/auftrag";
-import { mapGetters } from "vuex";
+  import AuftragModal from "./auftrag/auftrag";
+  import { mapGetters } from "vuex";
 
-export default {
-  components: {
-    auftrag: AuftragModal
-  },
+  export default {
+    components: {
+      auftrag: AuftragModal
+    },
 
-  data() {
-    return {
-      headers: [
-        {
-          text: "ID",
-          value: "id"
-        },
-        {
-          text: "Hersteller",
-          value: "manufacturer"
-        },
-        {
-          text: "Modell",
-          value: "model"
-        },
-        {
-          text: "Eingangsdatum",
-          value: "deliveryDay"
-        },
-        {
-          text: "Status",
-          value: "status"
-        }
-      ]
-    };
-  },
+    data() {
+      return {
+        headers: [
+          {
+            text: "ID",
+            value: "id"
+          },
+          {
+            text: "Hersteller",
+            value: "manufacturer"
+          },
+          {
+            text: "Modell",
+            value: "model"
+          },
+          {
+            text: "Eingangsdatum",
+            value: "deliveryDay"
+          },
+          {
+            text: "Status",
+            value: "status"
+          }
+        ]
+      };
+    },
 
-  computed: {
-    ...mapGetters(["filteredByManufacturer"]),
+    computed: {
+      ...mapGetters(["filteredByManufacturer"]),
 
-    myUserDevices() {
-      return this.filteredByManufacturer.map((device) => ({
-        ...device,
+      myUserDevices() {
+        return this.filteredByManufacturer.map(device => ({
+          ...device,
 
-        status: "in bearbeitung", //!!TODO: take it out when back end has one available
+          status: "in bearbeitung", //!!TODO: take it out when back end has one available
 
-        showModal: false
-      }));
+          showModal: false
+        }));
+      }
     }
-  }
-};
+  };
 </script>
 
 <style lang="scss" scoped>
-.row-pointer:hover {
-  cursor: pointer;
-}
+  .row-pointer:hover {
+    cursor: pointer;
+  }
 </style>

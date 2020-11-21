@@ -8,17 +8,17 @@
 </template>
 
 <script>
-import Navbar from "@/components/navbar.vue";
+  import Navbar from "@/components/navbar.vue";
 
-export default {
-  name: "App",
+  export default {
+    name: "App",
 
-  components: { Navbar },
+    components: { Navbar },
 
-  mounted() {
-    this.$store.dispatch("getUserDevices");
-  },
+    mounted() {
+      this.$store.dispatch("getUserDevices");
+    },
 
-  data: () => ({})
-};
+    data: () => ({})
+  };
 </script>

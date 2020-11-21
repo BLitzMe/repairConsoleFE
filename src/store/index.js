@@ -8,7 +8,7 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: { userDevices: [], currUserDevice: "" },
   getters: {
-    allUserDevices: (state) => state.userDevices,
+    allUserDevices: state => state.userDevices,
     filteredByManufacturer(state) {
       return filterManufacturer(state.userDevices, state.currUserDevice);
     }
@@ -29,13 +29,12 @@ export default new Vuex.Store({
             rejectUnauthorized: false
           })
         })
-        .then((devices) => {
+        .then(devices => {
           commit("setUserDevices", devices.data);
         })
-        .catch((err) => {
+        .catch(err => {
           console.log(err);
         });
     }
-  },
-  modules: {}
+  }
 });
