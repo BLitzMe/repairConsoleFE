@@ -1,11 +1,11 @@
 <template>
   <v-card>
-    <v-card-title>Neues Repatür Gerät</v-card-title>
+    <v-card-title>Neue Anleitung</v-card-title>
 
     <v-container>
       <v-row>
         <v-col cols="12">
-          <h4>Name</h4>
+          <h3>Name</h3>
 
           <v-text-field v-model="name" placeholder="Geben Sie der Name Ein" />
         </v-col>
@@ -13,22 +13,36 @@
 
       <v-row class="my-4">
         <v-col cols="12">
-          <h4>Notiz</h4>
-
-          <v-textarea v-model="notes" placeholder="Geben Sie Notizen Ein" outlined />
+          <v-container>
+            <v-row class="pb-2">
+              <h3>Notiz</h3>
+              <v-spacer />
+              <v-btn text title="Datei Hochladen" @click="fileInputMode = true">
+                <v-icon>mdi-link-variant-plus</v-icon>
+                <v-dialog v-model="fileInputMode">
+                  <file-input @close="fileInputMode = false" />
+                </v-dialog>
+              </v-btn>
+            </v-row>
+            <v-row>
+              <v-textarea v-model="notes" placeholder="Geben Sie Notizen Ein" outlined />
+            </v-row>
+          </v-container>
         </v-col>
       </v-row>
 
-      <v-card-actions class="justify-end">
-        <v-btn outlined color="red  lighten-1 " @click="close">Abrechen</v-btn>
+      <v-card-actions class="justify-end pr-0">
+        <v-btn outlined color="red  lighten-1 " @click="close" class="text-capitalize">
+          Abbrechen
+        </v-btn>
 
         <v-btn
           depressed
           @click="sendDeviceDetails"
-          class="mx-4"
+          class="ml-4 text-capitalize"
           color="green lighten-1 white--text"
         >
-          Spichern
+          Speichern
         </v-btn>
       </v-card-actions>
     </v-container>
@@ -38,20 +52,28 @@
 <script>
   import axios from "axios";
   import https from "https";
+  import FileInput from "./file-input";
 
   export default {
+    components: {
+      "file-input": FileInput
+    },
+
     props: {
       userDeviceId: {
         required: true,
         type: Number
       }
     },
+
     data() {
       return {
         name: null,
-        notes: null
+        notes: null,
+        fileInputMode: false
       };
     },
+
     methods: {
       close() {
         this.$emit("close");
@@ -62,7 +84,7 @@
       sendDeviceDetails() {
         axios
           .post(
-            "https://localhost:5001/api/devices/repairdevice",
+            "https://localhost:5001/api/repairdevices",
             { name: this.name, notes: this.notes },
             {
               "Content-Type": "application/json",

@@ -17,29 +17,32 @@
                 </v-col>
 
                 <v-col cols="8">
-                  <v-btn
-                    asdfdfads
-                    text
-                    @click="newRepairDeviceModal = true"
-                    v-if="propName === 'Reparaturanleitung' && prop == null"
-                  >
-                    tür Gerät Hinzufügen
-                    <v-icon class="ml-3">mdi-plus-circle-outline</v-icon>
-                  </v-btn>
-
-                  <p v-else-if="propName === 'tür Gerät'">
-                    Reparatur Gerät vorhanden
-                    <v-btn
-                      text
-                      class="ml-3"
-                      depressed
-                      color="green white--text"
-                      @click="repairDeviceModal = true"
-                    >
-                      Details Anzeigen
-                      <v-icon class="ml-1">mdi-arrow-right-circle</v-icon>
-                    </v-btn>
-                  </p>
+                  <v-container class="py-0 my-0" v-if="propName === 'Reparaturanleitung'">
+                    <v-row>
+                      <v-col cols="6">
+                        <p v-if="prop != null">
+                          Reparaturanleitung vorhanden
+                          <v-btn
+                            text
+                            class="ml-3 text-capitalize"
+                            depressed
+                            color="green white--text"
+                            @click="anleitungDialog = true"
+                          >
+                            Details Anzeigen
+                            <v-icon class="ml-1">mdi-arrow-right-circle</v-icon>
+                          </v-btn>
+                        </p>
+                      </v-col>
+                      <v-spacer />
+                      <v-col cols="6">
+                        <v-btn text @click="newAnleitungDialog = true" class="text-capitalize">
+                          Antleitung Hinzufügen
+                          <v-icon class="ml-3">mdi-plus-circle-outline</v-icon>
+                        </v-btn>
+                      </v-col>
+                    </v-row>
+                  </v-container>
 
                   <p v-else>{{ prop }}</p>
                 </v-col>
@@ -48,25 +51,25 @@
           </v-list-item>
         </v-col>
       </v-row>
-      <v-dialog v-model="repairDeviceModal">
-        <repair-device :repairDevice="getRepairDevice" @close="repairDeviceModal = false" />
+      <v-dialog v-model="anleitungDialog">
+        <anleitung device :repairDevice="getAnleitung" @close="anleitungDialog = false" />
       </v-dialog>
 
-      <v-dialog v-model="newRepairDeviceModal">
-        <new-repair-device @close="newRepairDeviceModal = false" :userDeviceId="auftragProps.id" />
+      <v-dialog v-model="newAnleitungDialog">
+        <neue-anleitung @close="newAnleitungDialog = false" :userDeviceId="auftragProps.id" />
       </v-dialog>
     </v-container>
   </div>
 </template>
 
 <script>
-  import NewRepairDevice from "../repair-device/new-repair-device.vue";
-  import RepairDevice from "../repair-device/repair-device.vue";
+  import NeueAnleitung from "../anleitung/neue-anleitung.vue";
+  import Anleitung from "../anleitung/anleitung.vue";
 
   export default {
     components: {
-      "new-repair-device": NewRepairDevice,
-      "repair-device": RepairDevice
+      "neue-anleitung": NeueAnleitung,
+      anleitung: Anleitung
     },
 
     props: {
@@ -78,8 +81,8 @@
 
     data() {
       return {
-        newRepairDeviceModal: false,
-        repairDeviceModal: false
+        newAnleitungDialog: false,
+        anleitungDialog: false
       };
     },
 
@@ -87,7 +90,7 @@
       transformedProps() {
         return this.getTransformedProps();
       },
-      getRepairDevice() {
+      getAnleitung() {
         return this.auftragProps.repairDevice;
       }
     },

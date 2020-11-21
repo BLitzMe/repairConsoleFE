@@ -1,6 +1,6 @@
 <template>
   <v-card>
-    <v-card-title>Reparatür Gerät</v-card-title>
+    <v-card-title>Reparaturanleitung</v-card-title>
 
     <v-card-text>
       <v-list>
@@ -14,8 +14,8 @@
               <v-col cols="4">{{ propName }}</v-col>
 
               <v-col cols="8">
-                <p v-if="prop == null">nicht vorhanden</p>
-                {{ prop }}
+                <p v-if="prop == null">Nicht vorhanden</p>
+                <p v-else>{{ prop }}</p>
               </v-col>
             </v-list-item>
           </v-row>
@@ -23,7 +23,9 @@
       </v-list>
 
       <v-card-actions class="justify-end">
-        <v-btn outlined color="red  lighten-1 " @click="close">Abrechen</v-btn>
+        <v-btn outlined color="red  lighten-1 " @click="close" class="text-capitalize">
+          Abbrechen
+        </v-btn>
       </v-card-actions>
     </v-card-text>
   </v-card>
@@ -37,6 +39,7 @@
         required: true
       }
     },
+
     computed: {
       transformedRepairDevice() {
         let props = {
@@ -48,6 +51,7 @@
         return props;
       }
     },
+
     methods: {
       close() {
         this.$emit("close");

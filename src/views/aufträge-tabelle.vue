@@ -1,5 +1,5 @@
 <template>
-  <v-container>
+  <v-container id="auftrag-tabelle">
     <v-row>
       <v-col cols="12">
         <v-data-table
@@ -27,7 +27,7 @@
 
                 <td>{{ auftrag.model }}</td>
 
-                <td>{{ auftrag.deliveryDay }}</td>
+                <td>{{ auftrag.date }}</td>
 
                 <td>{{ auftrag.status }}</td>
 
@@ -73,8 +73,8 @@
             value: "model"
           },
           {
-            text: "Eingangsdatum",
-            value: "deliveryDay"
+            text: "Lieferdatum",
+            value: "date"
           },
           {
             text: "Status",
@@ -90,6 +90,8 @@
       myUserDevices() {
         return this.filteredByManufacturer.map(device => ({
           ...device,
+
+          date: new Date(device.deliveryDay).toLocaleDateString("en-US"),
 
           status: "in bearbeitung", //!!TODO: take it out when back end has one available
 
