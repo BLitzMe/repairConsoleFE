@@ -1,6 +1,11 @@
 <template>
   <v-card>
-    <v-card-title>Reparaturanleitung</v-card-title>
+    <v-card-title>
+      Reparaturanleitung
+      <v-spacer />
+
+      <anhaenge />
+    </v-card-title>
 
     <v-card-text>
       <v-list>
@@ -15,6 +20,12 @@
 
               <v-col cols="8">
                 <p v-if="prop == null">Nicht vorhanden</p>
+
+                <anleitungen
+                  :anleitungen="prop"
+                  :name="propName"
+                  v-else-if="propName == 'Dokumente' || propName == 'Linke'"
+                />
                 <p v-else>{{ prop }}</p>
               </v-col>
             </v-list-item>
@@ -32,7 +43,15 @@
 </template>
 
 <script>
+  import Anhaenge from "./anhaenge/anhaenge.vue";
+  import Anleitungen from "./anleitung/anleitungen";
+
   export default {
+    components: {
+      anhaenge: Anhaenge,
+      anleitungen: Anleitungen
+    },
+
     props: {
       repairDevice: {
         type: Object,
@@ -43,10 +62,10 @@
     computed: {
       transformedRepairDevice() {
         let props = {
-          Id: this.repairDevice.id,
           "Name des Geräts": this.repairDevice.name,
           Notizen: this.repairDevice.notes,
-          Dokumente: this.repairDevice.documents
+          Dokumente: this.repairDevice.documents,
+          Linke: this.repairDevice.links
         };
         return props;
       }
@@ -59,5 +78,3 @@
     }
   };
 </script>
-
-<style lang="scss" scoped></style>

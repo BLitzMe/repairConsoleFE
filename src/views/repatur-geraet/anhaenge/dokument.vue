@@ -1,5 +1,6 @@
 <template>
   <v-card>
+    <v-card-title>Neues Dokument</v-card-title>
     <v-container>
       <v-row>
         <v-col>

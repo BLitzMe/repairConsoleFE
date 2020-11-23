@@ -16,13 +16,8 @@
           <v-container>
             <v-row class="pb-2">
               <h3>Notiz</h3>
+
               <v-spacer />
-              <v-btn text title="Datei Hochladen" @click="fileInputMode = true">
-                <v-icon>mdi-link-variant-plus</v-icon>
-                <v-dialog v-model="fileInputMode">
-                  <file-input @close="fileInputMode = false" />
-                </v-dialog>
-              </v-btn>
             </v-row>
             <v-row>
               <v-textarea v-model="notes" placeholder="Geben Sie Notizen Ein" outlined />
@@ -52,13 +47,8 @@
 <script>
   import axios from "axios";
   import https from "https";
-  import FileInput from "./file-input";
 
   export default {
-    components: {
-      "file-input": FileInput
-    },
-
     props: {
       userDeviceId: {
         required: true,
@@ -69,8 +59,7 @@
     data() {
       return {
         name: null,
-        notes: null,
-        fileInputMode: false
+        notes: null
       };
     },
 
@@ -122,5 +111,3 @@
     }
   };
 </script>
-
-<style lang="scss" scoped></style>
