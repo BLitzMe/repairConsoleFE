@@ -4,7 +4,7 @@
       Reparaturanleitung
       <v-spacer />
 
-      <anhaenge />
+      <anhaenge :repair-device="repairDevice" />
     </v-card-title>
 
     <v-card-text>
@@ -26,6 +26,7 @@
                   :name="propName"
                   v-else-if="propName == 'Dokumente' || propName == 'Linke'"
                 />
+
                 <p v-else>{{ prop }}</p>
               </v-col>
             </v-list-item>

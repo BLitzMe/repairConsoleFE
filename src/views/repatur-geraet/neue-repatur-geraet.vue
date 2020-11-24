@@ -47,6 +47,7 @@
 <script>
   import axios from "axios";
   import https from "https";
+  import { mapGetters } from "vuex";
 
   export default {
     props: {
@@ -64,6 +65,8 @@
     },
 
     methods: {
+      ...mapGetters(["api"]),
+
       close() {
         this.$emit("close");
         this.name = null;
@@ -73,7 +76,7 @@
       sendDeviceDetails() {
         axios
           .post(
-            "https://localhost:5001/api/repairdevices",
+            this.$api + "/repairdevices",
             { name: this.name, notes: this.notes },
             {
               "Content-Type": "application/json",
@@ -92,14 +95,11 @@
 
       patchDeviceId(repairDeviceId) {
         axios
-          .patch(
-            `https://localhost:5001/api/devices/${this.userDeviceId}/setRepairDevice?id=${repairDeviceId}`,
-            {
-              httpAgent: new https.Agent({
-                rejectUnauthorized: false
-              })
-            }
-          )
+          .patch(this.$api + `/devices/${this.userDeviceId}/setRepairDevice?id=${repairDeviceId}`, {
+            httpAgent: new https.Agent({
+              rejectUnauthorized: false
+            })
+          })
           .then(() => {
             this.$store.dispatch("getUserDevices");
             this.close();

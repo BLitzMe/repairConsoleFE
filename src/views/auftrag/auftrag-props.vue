@@ -16,35 +16,30 @@
               </v-col>
 
               <v-col cols="8">
-                <v-container class="py-0 my-0" v-if="propName === 'Repaturgerät'">
-                  <v-row>
-                    <v-col cols="6">
-                      <p v-if="prop != null">
-                        Reparaturanleitung vorhanden
-                        <v-btn
-                          text
-                          class="ml-3 text-capitalize"
-                          depressed
-                          color="green white--text"
-                          @click="reparaturGeraetDialog = true"
-                        >
-                          Details Anzeigen
-                          <v-icon class="ml-1">mdi-arrow-right-circle</v-icon>
-                        </v-btn>
-                      </p>
-                    </v-col>
+                <p v-if="prop != null && propName == 'Repaturgerät'">
+                  Reparaturanleitung vorhanden
+                  <v-btn
+                    text
+                    class="ml-3 text-capitalize"
+                    depressed
+                    color="green white--text"
+                    @click="reparaturGeraetDialog = true"
+                  >
+                    Details Anzeigen
+                    <v-icon class="ml-1">mdi-arrow-right-circle</v-icon>
+                  </v-btn>
+                </p>
 
-                    <v-spacer />
+                <v-btn
+                  v-else-if="propName == 'Repaturgerät'"
+                  text
+                  @click="newReparaturGeraetDialog = true"
+                  class="text-capitalize"
+                >
+                  Antleitung Hinzufügen
 
-                    <v-col cols="6">
-                      <v-btn text @click="newReparaturGeraetDialog = true" class="text-capitalize">
-                        Antleitung Hinzufügen
-
-                        <v-icon class="ml-3">mdi-plus-circle-outline</v-icon>
-                      </v-btn>
-                    </v-col>
-                  </v-row>
-                </v-container>
+                  <v-icon class="ml-3">mdi-plus-circle-outline</v-icon>
+                </v-btn>
 
                 <p v-else>{{ prop }}</p>
               </v-col>
@@ -55,7 +50,7 @@
     </v-row>
 
     <v-dialog v-model="reparaturGeraetDialog">
-      <repatur-geraet device :repairDevice="getAnleitung" @close="reparaturGeraetDialog = false" />
+      <repatur-geraet device :repair-device="getAnleitung" @close="reparaturGeraetDialog = false" />
     </v-dialog>
 
     <v-dialog v-model="newReparaturGeraetDialog">
@@ -103,7 +98,6 @@
 
     methods: {
       getTransformedProps() {
-        console.log(this.auftragProps);
         let props = { ...this.auftragProps };
 
         props = {

@@ -17,9 +17,11 @@
         </v-list-item>
       </v-list>
     </v-menu>
+
     <v-dialog v-model="linkInputMode">
-      <linky @close="linkInputMode = false" />
+      <linky :repair-device-id="repairDevice.id" @close="linkInputMode = false" />
     </v-dialog>
+
     <v-dialog v-model="dokumentInputMode">
       <dokument @close="dokumentInputMode = false" />
     </v-dialog>
@@ -34,6 +36,13 @@
     components: {
       dokument: Dokument,
       linky: Link
+    },
+
+    props: {
+      repairDevice: {
+        required: true,
+        type: Object
+      }
     },
 
     data() {

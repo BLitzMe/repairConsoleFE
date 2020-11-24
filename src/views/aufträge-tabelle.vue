@@ -19,7 +19,7 @@
                 class="row-pointer"
                 v-for="auftrag in items"
                 :key="auftrag.id"
-                @click="auftrag.showModal = true"
+                @click="openModal(auftrag)"
               >
                 <td>{{ auftrag.id }}</td>
 
@@ -37,7 +37,7 @@
                   persistent
                   fullscreen
                 >
-                  <auftrag @close="auftrag.showModal = false" :auftrag="auftrag"></auftrag>
+                  <auftrag @close="closeModal(auftrag)" :auftrag="auftrag"></auftrag>
                 </v-dialog>
               </tr>
             </tbody>
@@ -80,7 +80,8 @@
             text: "Status",
             value: "status"
           }
-        ]
+        ],
+        openModalId: null
       };
     },
 
@@ -95,8 +96,21 @@
 
           status: "in bearbeitung", //!!TODO: take it out when back end has one available
 
-          showModal: false
+          //FIXME: take care of this hack in a better way
+          showModal: this.openModalId == device.id ? true : false
         }));
+      }
+    },
+
+    methods: {
+      openModal(auftrag) {
+        auftrag.showModal = true;
+        this.openModalId = auftrag.id;
+      },
+
+      closeModal(auftrag) {
+        auftrag.showModal = false;
+        this.openModalId = null;
       }
     }
   };
