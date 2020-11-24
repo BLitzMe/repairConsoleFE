@@ -23,7 +23,7 @@
     </v-dialog>
 
     <v-dialog v-model="dokumentInputMode">
-      <dokument @close="dokumentInputMode = false" />
+      <dokument :repair-device-id="repairDevice.id" @close="dokumentInputMode = false" />
     </v-dialog>
   </div>
 </template>
