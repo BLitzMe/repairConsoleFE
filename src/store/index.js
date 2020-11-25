@@ -2,7 +2,9 @@ import Vue from "vue";
 import Vuex from "vuex";
 import axios from "axios";
 import https from "https";
+
 import { filterManufacturer } from "./filters";
+
 Vue.use(Vuex);
 
 export default new Vuex.Store({

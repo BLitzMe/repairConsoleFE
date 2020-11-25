@@ -5,6 +5,7 @@
       <v-expansion-panel-content>
         <div v-for="anleitung in anleitungen" :key="anleitung.id">
           <dokument :dokument="anleitung" v-if="name == 'Dokumente'" />
+
           <linky :link="anleitung" v-if="name == 'Linke'" />
         </div>
       </v-expansion-panel-content>
