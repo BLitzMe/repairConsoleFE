@@ -31,7 +31,7 @@
                 </p>
 
                 <v-btn
-                  v-else-if="propName == 'Repaturgerät'"
+                  v-else-if="propName == 'Reparaturgerät'"
                   text
                   @click="newReparaturGeraetDialog = true"
                   class="text-capitalize"
@@ -104,7 +104,7 @@
           Alter: props.age,
           Kategorie: props.category,
           Defekt: props.defect,
-          Lieferdatum: props.deliveryDay,
+          Lieferdatum: new Date(props.deliveryDay).toLocaleDateString("en-US"),
           Beschreibung: props.description,
           Hersteller: props.manufacturer,
           Modell: props.model,
