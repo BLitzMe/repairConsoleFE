@@ -3,13 +3,13 @@
     <v-row>
       <v-col cols="12">
         <v-data-table
-          :headers="headers"
+          :headers="tableHeaders"
           v-bind:items="myUserDevices"
           class="elevation-1"
           :items-per-page="15"
+          width
           :footer-props="{
             showFirstLastPage: true,
-
             'items-per-page-text': 'Aufträge Pro Seite'
           }"
         >
@@ -37,7 +37,7 @@
                   persistent
                   fullscreen
                 >
-                  <auftrag @close="closeModal(auftrag)" :auftrag="auftrag"></auftrag>
+                  <auftrag @close="closeModal(auftrag)" :auftrag="auftrag" />
                 </v-dialog>
               </tr>
             </tbody>
@@ -99,6 +99,10 @@
           //FIXME: take care of this hack in a better way
           showModal: this.openModalId == device.id ? true : false
         }));
+      },
+
+      tableHeaders() {
+        return this.headers.map(it => ({ ...it, width: 20 }));
       }
     },
 

@@ -30,7 +30,11 @@
 
     methods: {
       sendRating() {
-        console.log("this shit is not available");
+        this.$axios
+          .post(this.$api + `/repairDevices/file/${this.dokument.id}/rating?value=${this.rating}`)
+          .then(doc => {
+            console.log(doc);
+          });
       },
 
       openFile() {

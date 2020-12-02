@@ -16,7 +16,7 @@
               </v-col>
 
               <v-col cols="8">
-                <p v-if="prop != null && propName == 'Repaturgerät'">
+                <p v-if="prop != null && propName == 'Reparaturgerät'">
                   Reparaturanleitung vorhanden
                   <v-btn
                     text
@@ -109,8 +109,8 @@
           Hersteller: props.manufacturer,
           Modell: props.model,
           Netzteil: props.powersupply,
-          Repaturgerät: props.repairDevice,
-          Seirennümmer: props.serialNumber
+          Reparaturgerät: props.repairDevice,
+          Seriennummer: props.serialNumber
         };
 
         return props;
