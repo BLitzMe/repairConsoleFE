@@ -7,12 +7,12 @@ import axios from "axios";
 
 Vue.config.productionTip = false;
 
-Vue.prototype.$api = process.env.VUE_APP_API || "https://localhost:5001/api";
+Vue.prototype.$api = process.env.VUE_APP_MY_API || "https://localhost:5001/api";
 Vue.prototype.$axios = axios;
 
 new Vue({
   router,
   store,
   vuetify,
-  render: h => h(App)
+  render: (h) => h(App)
 }).$mount("#app");
