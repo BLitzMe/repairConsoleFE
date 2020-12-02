@@ -1,4 +1,4 @@
-FROM node:lts-alpine
+FROM node:lts-alpine AS builder
 
 # make the 'app' folder the current working directory
 WORKDIR /app
@@ -7,10 +7,13 @@ WORKDIR /app
 COPY package*.json ./
 
 # install project dependencies
-RUN npm install
+RUN npm ci && npm audit fix 
 
 # copy project files and folders to the current working directory (i.e. 'app' folder)
 COPY . .
 
+RUN npm run build
 
-CMD [ "npm","run", "serve" ]
+FROM nginx:alpine
+
+COPY --from=builder /app/dist/* /usr/share/nginx/html/
