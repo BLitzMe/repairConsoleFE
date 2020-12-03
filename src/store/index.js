@@ -30,6 +30,7 @@ export default new Vuex.Store({
 
   actions: {
     getUserDevices({ commit }) {
+      console.trace(this.$api);
       axios
         .get(this.$api + "/devices", {
           httpAgent: new https.Agent({
