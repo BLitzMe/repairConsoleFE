@@ -53,6 +53,12 @@
   import { mapGetters } from "vuex";
 
   export default {
+    beforeMount() {
+      if (this.filteredByManufacturer.length < 1) {
+        this.$router.push("/");
+      }
+    },
+
     components: {
       auftrag: AuftragModal
     },

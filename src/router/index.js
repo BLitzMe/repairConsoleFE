@@ -6,7 +6,12 @@ Vue.use(VueRouter);
 const routes = [
   {
     path: "/",
-    name: "Aufträge",
+    name: "kategorien",
+    component: () => import(/* webpackChunkName: "about" */ "../views/landing-page.vue")
+  },
+  {
+    path: "/aufträge",
+    name: "aufträge",
     component: () => import(/* webpackChunkName: "about" */ "../views/aufträge-tabelle.vue")
   }
 ];

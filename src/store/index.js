@@ -8,14 +8,16 @@ import { filterManufacturer } from "./filters";
 Vue.use(Vuex);
 
 export default new Vuex.Store({
-  state: { userDevices: [], currUserDevice: "" },
+  state: { userDevices: [], currUserDevice: "", selectedDevices: [] },
 
   getters: {
     allUserDevices: state => state.userDevices,
 
     filteredByManufacturer(state) {
-      return filterManufacturer(state.userDevices, state.currUserDevice);
-    }
+      return filterManufacturer(state.selectedDevices, state.currUserDevice);
+    },
+
+    selectedDevices: state => state.selectedDevices
   },
 
   mutations: {
@@ -24,7 +26,12 @@ export default new Vuex.Store({
     },
 
     changeCurrentDevice(state, device) {
+      console.log(device);
       state.currUserDevice = device;
+    },
+
+    selectCategory(state, category) {
+      state.selectedDevices = state.userDevices.filter(device => device.category == category);
     }
   },
 

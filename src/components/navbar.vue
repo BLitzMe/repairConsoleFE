@@ -42,7 +42,7 @@
         filterTerm: "",
         drawer: false,
         searchBar: false,
-        links: [{ icon: "mdi-briefcase-outline", text: "Aufträge", route: "/" }]
+        links: [{ icon: "mdi-form-select", text: "Kategorien", route: "/" }]
       };
     },
 
