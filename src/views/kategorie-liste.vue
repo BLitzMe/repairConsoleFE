@@ -31,11 +31,11 @@
     },
 
     methods: {
-      ...mapMutations(["selectCategory"]),
+      ...mapMutations(["selectRepairDevices"]),
 
       handleCategorySelection(category) {
-        this.selectCategory(category.key);
-        this.$router.push("/aufträge");
+        this.selectRepairDevices(category.key);
+        this.$router.push("/reparatur-geraet-liste");
       }
     }
   };

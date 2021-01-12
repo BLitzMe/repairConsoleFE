@@ -45,7 +45,7 @@
 
 <script>
   import Anhaenge from "./anhaenge/anhaenge.vue";
-  import Anleitungen from "./anleitung/anleitungen";
+  import Anleitungen from "./anleitungen/anleitungen.vue";
 
   export default {
     components: {

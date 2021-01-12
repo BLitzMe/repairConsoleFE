@@ -7,12 +7,22 @@ const routes = [
   {
     path: "/",
     name: "kategorien",
-    component: () => import(/* webpackChunkName: "about" */ "../views/landing-page.vue")
+    component: () => import(/* webpackChunkName: "about" */ "../views/kategorie-liste.vue")
   },
+
   {
     path: "/aufträge",
     name: "aufträge",
     component: () => import(/* webpackChunkName: "about" */ "../views/aufträge-tabelle.vue")
+  },
+
+  {
+    path: "/reparatur-geraet-liste",
+    name: "ReparaturGeraetListe",
+    component: () =>
+      import(
+        /* webpackChunkName: "about" */ "../views/repatur-geraet-liste/repatur-geraet-liste.vue"
+      )
   }
 ];
 
