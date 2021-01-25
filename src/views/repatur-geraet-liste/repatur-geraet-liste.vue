@@ -11,7 +11,9 @@
           <p>
             <b>Durchschnittszeit:</b>
             {{
-              reparaturGeraet.averageTimeTaken == null ? "N/A" : reparaturGeraet.averageTimeTaken
+              reparaturGeraet.averageTimeTaken == null
+                ? "Keine Daten"
+                : reparaturGeraet.averageTimeTaken
             }}
           </p>
           <p>
@@ -22,7 +24,7 @@
       </v-card>
     </div>
     <v-dialog v-model="modalBool">
-      <reparaturGeraet device :repair-device="data" @close="closeModal()" />
+      <reparaturGeraet :repair-device="data" @close="closeModal()" />
     </v-dialog>
   </div>
 </template>
@@ -62,13 +64,19 @@
 
       closeModal() {
         this.modalBool = false;
-        this.data = null;
       }
     }
   };
 </script>
 
 <style lang="scss" scoped>
+  .v-card p {
+    background-color: #a9b8bb;
+    margin: 2px;
+    padding: 4px;
+    border-radius: 0.3em;
+  }
+
   .manuals {
     padding: 4em 0em 0em 0em;
     display: grid;

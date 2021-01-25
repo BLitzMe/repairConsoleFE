@@ -37,10 +37,10 @@
                   <v-container>
                     <v-row>
                       <v-col cols="8">
-                        <v-text-field v-model="timeInput"></v-text-field>
+                        <v-text-field v-model="timeInput" label="hh:mm:ss"></v-text-field>
                       </v-col>
                       <v-col cols="2" class="pt-5">
-                        <v-btn @click="editTime = false" outlined color="green white--text">
+                        <v-btn @click="sendTime" outlined color="green white--text">
                           <v-icon size="26">mdi-check</v-icon>
                         </v-btn>
                       </v-col>
@@ -108,13 +108,29 @@
           Dokumente: this.repairDevice.documents,
           Linke: this.repairDevice.links
         };
-        return props;
+        return props || {};
       }
     },
 
     methods: {
       close() {
         this.$emit("close");
+      },
+
+      sendTime() {
+        console.log(this.timeInput, this.repairDevice);
+        this.editTime = false;
+        this.$axios
+          .patch(
+            this.$api +
+              `/devices/${this.repairDevice.userDeviceId}/setTimeTaken?timeSpan=${this.timeInput}`
+          )
+          .then(resp => {
+            console.trace(resp);
+            if (resp.status == 200) {
+              this.$store.dispatch("getUserDevices");
+            }
+          });
       }
     }
   };

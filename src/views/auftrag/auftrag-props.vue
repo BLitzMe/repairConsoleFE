@@ -50,7 +50,7 @@
     </v-row>
 
     <v-dialog v-model="reparaturGeraetDialog">
-      <repatur-geraet device :repair-device="getAnleitung" @close="reparaturGeraetDialog = false" />
+      <repatur-geraet :repair-device="getAnleitung" @close="reparaturGeraetDialog = false" />
     </v-dialog>
 
     <v-dialog v-model="newReparaturGeraetDialog">
@@ -94,7 +94,8 @@
       getAnleitung() {
         return {
           ...this.auftragProps.repairDevice,
-          timeTaken: this.auftragProps.timeTaken
+          timeTaken: this.auftragProps.timeTaken,
+          userDeviceId: this.auftragProps.id
         };
       }
     },
