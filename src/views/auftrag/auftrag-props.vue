@@ -92,7 +92,10 @@
       },
 
       getAnleitung() {
-        return this.auftragProps.repairDevice;
+        return {
+          ...this.auftragProps.repairDevice,
+          timeTaken: this.auftragProps.timeTaken
+        };
       }
     },
 

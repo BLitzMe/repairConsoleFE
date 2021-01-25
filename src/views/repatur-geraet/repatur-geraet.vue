@@ -19,7 +19,39 @@
               <v-col cols="4">{{ propName }}</v-col>
 
               <v-col cols="8">
-                <p v-if="prop == null">Nicht vorhanden</p>
+                <p v-if="propName == 'Bearbeitungszeit' && prop == null && !editTime">
+                  keine Angabe
+                  <v-btn @click="editTime = true" text color="green white--text">
+                    <v-icon>mdi-square-edit-outline</v-icon>
+                  </v-btn>
+                </p>
+
+                <p v-if="propName == 'Bearbeitungszeit' && prop != null">
+                  {{ prop }}
+                  <v-btn @click="editTime = true" text>
+                    <v-icon>mdi-square-edit-outline</v-icon>
+                  </v-btn>
+                </p>
+
+                <p v-if="editTime && propName == 'Bearbeitungszeit'">
+                  <v-container>
+                    <v-row>
+                      <v-col cols="8">
+                        <v-text-field v-model="timeInput"></v-text-field>
+                      </v-col>
+                      <v-col cols="2" class="pt-5">
+                        <v-btn @click="editTime = false" outlined color="green white--text">
+                          <v-icon size="26">mdi-check</v-icon>
+                        </v-btn>
+                      </v-col>
+                      <v-col cols="2" class="pt-5">
+                        <v-btn @click="editTime = false" outlined color="red darken-1">
+                          <v-icon size="26">mdi-window-close</v-icon>
+                        </v-btn>
+                      </v-col>
+                    </v-row>
+                  </v-container>
+                </p>
 
                 <anleitungen
                   :anleitungen="prop"
@@ -60,11 +92,19 @@
       }
     },
 
+    data() {
+      return {
+        timeInput: null,
+        editTime: false
+      };
+    },
+
     computed: {
       transformedRepairDevice() {
         let props = {
           "Name des Geräts": this.repairDevice.name,
           Notizen: this.repairDevice.notes,
+          Bearbeitungszeit: this.repairDevice.timeTaken,
           Dokumente: this.repairDevice.documents,
           Linke: this.repairDevice.links
         };
@@ -79,3 +119,9 @@
     }
   };
 </script>
+
+<style lang="css">
+  .v-card p {
+    margin: unset;
+  }
+</style>

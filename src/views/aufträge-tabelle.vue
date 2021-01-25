@@ -29,7 +29,7 @@
 
                 <td>{{ auftrag.date }}</td>
 
-                <td>{{ auftrag.status }}</td>
+                <td>{{ auftrag.anleitung.substring(1) }}</td>
 
                 <v-dialog
                   v-model="auftrag.showModal"
@@ -77,8 +77,8 @@
             value: "date"
           },
           {
-            text: "Status",
-            value: "status"
+            text: "Anleitung",
+            value: "anleitung"
           }
         ],
         openModalId: null
@@ -89,12 +89,13 @@
       ...mapGetters(["filteredByManufacturer"]),
 
       myUserDevices() {
+        console.log(this.filteredByManufacturer);
         return this.filteredByManufacturer.map(device => ({
           ...device,
 
           date: new Date(device.deliveryDay).toLocaleDateString("en-US"),
 
-          status: "in bearbeitung", //!!TODO: take it out when back end has one available
+          anleitung: device.repairDevice == null ? "2Nicht Vorhanden" : "1Vorhanden", //!!TODO: take it out when back end has one available
 
           //FIXME: take care of this hack in a better way
           showModal: this.openModalId == device.id ? true : false

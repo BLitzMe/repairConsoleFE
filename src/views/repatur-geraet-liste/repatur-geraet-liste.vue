@@ -1,44 +1,29 @@
 <template>
-  <div>
-    <v-container>
-      <v-row>
-        <v-col cols="12">
-          <v-data-table
-            :headers="tableHeaders"
-            v-bind:items="reparaturGeraeten"
-            class="elevation-1"
-            :footer-props="{
-              showFirstLastPage: true,
-              'items-per-page-text': 'Aufträge Pro Seite'
-            }"
-          >
-            <template v-slot:body="{ items }">
-              <tbody>
-                <tr
-                  class="row-pointer"
-                  v-for="reparaturGeraet in items"
-                  :key="reparaturGeraet.id"
-                  @click="openModal(reparaturGeraet)"
-                >
-                  <td>{{ reparaturGeraet.id }}</td>
-                  <td>{{ reparaturGeraet.name }}</td>
-                  <td>{{ reparaturGeraet.averageTimeTaken }}</td>
-                  <td>{{ reparaturGeraet.notes }}</td>
-
-                  <v-dialog v-model="reparaturGeraet.showModal" persistent>
-                    <reparaturGerät
-                      :repair-device="reparaturGeraet"
-                      @close="closeModal(reparaturGeraet)"
-                      :elemente="reparaturGeraet"
-                    />
-                  </v-dialog>
-                </tr>
-              </tbody>
-            </template>
-          </v-data-table>
-        </v-col>
-      </v-row>
-    </v-container>
+  <div class="manuals">
+    <div v-for="reparaturGeraet in reparaturGeraeten" :key="reparaturGeraet.id">
+      <v-card @click="openModal(reparaturGeraet)">
+        <v-card-title>Anleitung Nr. {{ reparaturGeraet.id }}</v-card-title>
+        <v-card-text>
+          <p>
+            <b>Name:</b>
+            {{ reparaturGeraet.name }}
+          </p>
+          <p>
+            <b>Durchschnittszeit:</b>
+            {{
+              reparaturGeraet.averageTimeTaken == null ? "N/A" : reparaturGeraet.averageTimeTaken
+            }}
+          </p>
+          <p>
+            <b>Notizen:</b>
+            {{ reparaturGeraet.notes }}
+          </p>
+        </v-card-text>
+      </v-card>
+    </div>
+    <v-dialog v-model="modalBool">
+      <reparaturGeraet device :repair-device="data" @close="closeModal()" />
+    </v-dialog>
   </div>
 </template>
 
@@ -48,17 +33,13 @@
 
   export default {
     components: {
-      reparaturGerät: reparaturGerät
+      reparaturGeraet: reparaturGerät
     },
 
     data() {
       return {
-        headers: [
-          { text: "ID", value: "id" },
-          { text: "Name", value: "name" },
-          { text: "Durchschnittszeit", value: "averageTimeTaken" },
-          { text: "Notes", value: "notes" }
-        ]
+        data: null,
+        modalBool: false
       };
     },
 
@@ -70,26 +51,35 @@
           ...manual,
           showModal: false
         }));
-      },
-
-      tableHeaders() {
-        return this.headers.map(it => ({ ...it, width: 20 }));
       }
     },
 
     methods: {
       openModal(reparaturGeraet) {
-        reparaturGeraet.showModal = true;
+        this.data = reparaturGeraet;
+        this.modalBool = true;
       },
 
-      closeModal(reparaturGeraet) {
-        reparaturGeraet.showModal = false;
+      closeModal() {
+        this.modalBool = false;
+        this.data = null;
       }
     }
   };
 </script>
 
 <style lang="scss" scoped>
+  .manuals {
+    padding: 4em 0em 0em 0em;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 30px;
+  }
+
+  .card:hover {
+    cursor: pointer;
+    background-color: rgb(185, 187, 185);
+  }
   .row-pointer:hover {
     cursor: pointer;
   }

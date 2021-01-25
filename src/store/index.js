@@ -32,7 +32,7 @@ export default new Vuex.Store({
 
     selectRepairDevices(state, category) {
       state.selectedRepairDevices = state.userDevices
-        .filter(device => device.category == category)
+        .filter(device => device.category == category && device.repairDevice)
         .map(device => device.repairDevice);
     }
   },
