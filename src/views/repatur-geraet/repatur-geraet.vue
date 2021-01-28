@@ -39,11 +39,13 @@
                       <v-col cols="8">
                         <v-text-field v-model="timeInput" label="hh:mm:ss"></v-text-field>
                       </v-col>
+
                       <v-col cols="2" class="pt-5">
                         <v-btn @click="sendTime" outlined color="green white--text">
                           <v-icon size="26">mdi-check</v-icon>
                         </v-btn>
                       </v-col>
+
                       <v-col cols="2" class="pt-5">
                         <v-btn @click="editTime = false" outlined color="red darken-1">
                           <v-icon size="26">mdi-window-close</v-icon>
@@ -101,14 +103,15 @@
 
     computed: {
       transformedRepairDevice() {
-        let props = {
-          "Name des Geräts": this.repairDevice.name,
-          Notizen: this.repairDevice.notes,
-          Bearbeitungszeit: this.repairDevice.timeTaken,
-          Dokumente: this.repairDevice.documents,
-          Linke: this.repairDevice.links
-        };
-        return props || {};
+        return (
+          {
+            "Name des Geräts": this.repairDevice.name,
+            Notizen: this.repairDevice.notes,
+            Bearbeitungszeit: this.repairDevice.timeTaken,
+            Dokumente: this.repairDevice.documents,
+            Linke: this.repairDevice.links
+          } || {}
+        );
       }
     },
 

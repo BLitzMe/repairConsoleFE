@@ -39,7 +39,6 @@
 
       openFile() {
         this.$axios.get(this.$api + `/repairDevices/file/${this.dokument.id}`).then(response => {
-          console.log(response);
           const blob = new Blob([response.data]);
           const link = document.createElement("a");
 

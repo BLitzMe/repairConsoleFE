@@ -89,7 +89,6 @@
       ...mapGetters(["filteredByManufacturer"]),
 
       myUserDevices() {
-        console.log(this.filteredByManufacturer);
         return this.filteredByManufacturer.map(device => ({
           ...device,
 

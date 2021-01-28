@@ -23,6 +23,15 @@ const routes = [
       import(
         /* webpackChunkName: "about" */ "../views/repatur-geraet-liste/repatur-geraet-liste.vue"
       )
+  },
+
+  {
+    path: "/gefilterte-liste",
+    name: "ReparaturGeraetListe",
+    component: () =>
+      import(
+        /* webpackChunkName: "about" */ "../views/repatur-geraet-liste/repatur-geraet-liste.vue"
+      )
   }
 ];
 
