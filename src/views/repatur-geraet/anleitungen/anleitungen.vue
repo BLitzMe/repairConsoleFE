@@ -2,6 +2,7 @@
   <v-expansion-panels flat>
     <v-expansion-panel>
       <v-expansion-panel-header>{{ anleitungen.length }} {{ name }}</v-expansion-panel-header>
+
       <v-expansion-panel-content>
         <div v-for="anleitung in anleitungen" :key="anleitung.id">
           <dokument :dokument="anleitung" v-if="name == 'Dokumente'" />

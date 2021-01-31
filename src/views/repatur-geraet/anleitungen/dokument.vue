@@ -4,6 +4,7 @@
       <v-col cols="8">
         <v-btn text class="text-capitalize" @click="openFile">{{ dokument.fileName }}</v-btn>
       </v-col>
+
       <v-col cols="4">
         <v-btn text class="mr-9 " @click="sendRating">
           <v-rating hover small length="5" v-model="rating" />

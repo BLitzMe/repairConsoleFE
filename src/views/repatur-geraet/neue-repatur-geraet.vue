@@ -19,6 +19,7 @@
 
               <v-spacer />
             </v-row>
+
             <v-row>
               <v-textarea v-model="notes" placeholder="Geben Sie Notizen Ein" outlined />
             </v-row>

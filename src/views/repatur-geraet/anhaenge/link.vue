@@ -8,6 +8,7 @@
           <v-text-field v-model="linkInput" label="Link" outlined clearable />
         </v-col>
       </v-row>
+
       <v-row>
         <v-col cols="12">
           <v-text-field v-model="description" label="Beschreibung" outlined clearable />
