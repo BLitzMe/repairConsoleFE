@@ -50,7 +50,7 @@
 
 <script>
   import AuftragModal from "./auftrag/auftrag";
-  import { mapGetters } from "vuex";
+  import { mapGetters, mapMutations } from "vuex";
 
   export default {
     components: {
@@ -85,6 +85,10 @@
       };
     },
 
+    mounted() {
+      this.changeCurrentDevice("");
+    },
+
     computed: {
       ...mapGetters(["filteredByManufacturer"]),
 
@@ -107,6 +111,8 @@
     },
 
     methods: {
+      ...mapMutations(["changeCurrentDevice"]),
+
       openModal(auftrag) {
         auftrag.showModal = true;
         this.openModalId = auftrag.id;

@@ -13,9 +13,7 @@ export default new Vuex.Store({
   getters: {
     allUserDevices: state => state.userDevices,
 
-    filteredByManufacturer(state) {
-      return filterManufacturer(state.userDevices, state.currManufacturer);
-    },
+    filteredByManufacturer: state => filterManufacturer(state.userDevices, state.currManufacturer),
 
     selectedRepairDevices: state =>
       filterManufacturer(state.selectedRepairDevices, state.currManufacturer)
@@ -31,7 +29,7 @@ export default new Vuex.Store({
     },
 
     selectRepairDevices(state, category) {
-      state.selectedRepairDevices = state.userDevices
+      state.selectedRepairDevices = [...state.userDevices]
         .filter(device => device.category == category && device.repairDevice)
         .map(device => {
           return (
@@ -55,6 +53,7 @@ export default new Vuex.Store({
           })
         })
         .then(devices => {
+          console.log(devices);
           commit("setUserDevices", devices.data);
         })
         .catch(err => {

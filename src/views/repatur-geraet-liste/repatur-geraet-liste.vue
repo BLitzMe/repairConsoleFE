@@ -59,7 +59,7 @@
         </v-card>
       </div>
 
-      <v-dialog v-model="modalBool">
+      <v-dialog v-model="modalBool" persistent>
         <reparaturGeraet :repair-device="data" @close="closeModal()" />
       </v-dialog>
     </div>
@@ -76,9 +76,7 @@
     },
 
     mounted() {
-      if (this.route == "/reparatur-geraet-liste") {
-        this.filterTerm = "";
-      }
+      this.changeCurrentDevice("");
     },
 
     data() {

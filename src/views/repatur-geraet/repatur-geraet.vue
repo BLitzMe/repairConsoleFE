@@ -34,23 +34,33 @@
                 </p>
 
                 <p v-if="editTime && propName == 'Bearbeitungszeit'">
-                  <v-container>
+                  <v-container class="pb-0">
                     <v-row>
-                      <v-col cols="8">
+                      <v-col cols="4" class="pb-0">
                         <v-text-field v-model="timeInput" label="hh:mm:ss"></v-text-field>
                       </v-col>
 
-                      <v-col cols="2" class="pt-5">
+                      <v-col cols="4" class="pb-0">
+                        <v-select
+                          :items="timeTypes"
+                          label="Zeit Typ auswählen"
+                          :menu-props="{ offsetY: true }"
+                          v-model="selectedTimeType"
+                        />
+                      </v-col>
+
+                      <v-col cols="1" class="pt-5">
                         <v-btn @click="sendTime" outlined color="green white--text">
                           <v-icon size="26">mdi-check</v-icon>
                         </v-btn>
                       </v-col>
 
-                      <v-col cols="2" class="pt-5">
+                      <v-col cols="1" class="pt-5 ml-6">
                         <v-btn @click="editTime = false" outlined color="red darken-1">
                           <v-icon size="26">mdi-window-close</v-icon>
                         </v-btn>
                       </v-col>
+                      <v-col cols="2"></v-col>
                     </v-row>
                   </v-container>
                 </p>
@@ -97,7 +107,22 @@
     data() {
       return {
         timeInput: null,
-        editTime: false
+        editTime: false,
+        timeTypes: [
+          {
+            value: "ErrorDiagnosis",
+            text: "Fehler Diagnose"
+          },
+          {
+            value: "Repair",
+            text: "Reparatur"
+          },
+          {
+            value: "PartSearch",
+            text: "Teilen Suche"
+          }
+        ],
+        selectedTimeType: null
       };
     },
 
@@ -121,12 +146,12 @@
       },
 
       sendTime() {
-        console.log(this.timeInput, this.repairDevice);
+        console.log(this.timeInput, this.repairDevice, this.selectedTimeType);
         this.editTime = false;
         this.$axios
           .patch(
             this.$api +
-              `/devices/${this.repairDevice.userDeviceId}/setTimeTaken?timeSpan=${this.timeInput}`
+              `/devices/${this.repairDevice.userDeviceId}/setTimeTaken?timeSpan=${this.timeInput}&type=${this.selectedTimeType}`
           )
           .then(resp => {
             console.trace(resp);
