@@ -19,21 +19,21 @@
               <v-col cols="4">{{ propName }}</v-col>
 
               <v-col cols="8">
-                <p v-if="propName == 'Bearbeitungszeit' && prop == null && !editTime">
+                <p v-if="propName == 'Durchschnittszeit' && prop == null && !editTime">
                   keine Angabe
                   <v-btn @click="editTime = true" text color="green white--text">
                     <v-icon>mdi-square-edit-outline</v-icon>
                   </v-btn>
                 </p>
 
-                <p v-if="propName == 'Bearbeitungszeit' && prop != null">
+                <p v-if="propName == 'Durchschnittszeit' && prop != null">
                   {{ prop }}
                   <v-btn @click="editTime = true" text>
                     <v-icon>mdi-square-edit-outline</v-icon>
                   </v-btn>
                 </p>
 
-                <p v-if="editTime && propName == 'Bearbeitungszeit'">
+                <p v-if="editTime && propName == 'Durchschnittszeit'">
                   <v-container class="pb-0">
                     <v-row>
                       <v-col cols="4" class="pb-0">
@@ -71,7 +71,7 @@
                   v-else-if="propName == 'Dokumente' || propName == 'Linke'"
                 />
 
-                <p v-else>{{ prop }}</p>
+                <p v-else-if="propName != 'Durchschnittszeit'">{{ prop }}</p>
               </v-col>
             </v-list-item>
           </v-row>
@@ -104,6 +104,10 @@
       }
     },
 
+    mounted() {
+      this.getAverageTime();
+    },
+
     data() {
       return {
         timeInput: null,
@@ -122,7 +126,8 @@
             text: "Teilen Suche"
           }
         ],
-        selectedTimeType: null
+        selectedTimeType: null,
+        averageTime: null
       };
     },
 
@@ -132,7 +137,7 @@
           {
             "Name des Geräts": this.repairDevice.name,
             Notizen: this.repairDevice.notes,
-            Bearbeitungszeit: this.repairDevice.timeTaken,
+            Durchschnittszeit: this.averageTime,
             Dokumente: this.repairDevice.documents,
             Linke: this.repairDevice.links
           } || {}
@@ -157,8 +162,15 @@
             console.trace(resp);
             if (resp.status == 200) {
               this.$store.dispatch("getUserDevices");
+              this.getAverageTime();
             }
           });
+      },
+
+      getAverageTime() {
+        this.$axios.get(this.$api + `/repairdevices/${this.repairDevice.id}`).then(resp => {
+          this.averageTime = resp.data.averageTimeTaken;
+        });
       }
     }
   };
